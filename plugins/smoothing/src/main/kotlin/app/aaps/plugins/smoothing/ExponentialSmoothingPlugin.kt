@@ -7,7 +7,10 @@ import app.aaps.core.interfaces.logging.AAPSLogger
 import app.aaps.core.interfaces.plugin.PluginBase
 import app.aaps.core.interfaces.plugin.PluginDescription
 import app.aaps.core.interfaces.resources.ResourceHelper
+import app.aaps.core.interfaces.sharedPreferences.SP
 import app.aaps.core.interfaces.smoothing.Smoothing
+import org.json.JSONException
+import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.math.max
@@ -16,13 +19,15 @@ import kotlin.math.round
 @Singleton
 class ExponentialSmoothingPlugin @Inject constructor(
     aapsLogger: AAPSLogger,
-    rh: ResourceHelper
+    rh: ResourceHelper,
+    val sp: SP
 ) : PluginBase(
     PluginDescription()
         .mainType(PluginType.SMOOTHING)
         .pluginIcon(app.aaps.core.ui.R.drawable.ic_timeline_24)
         .pluginName(R.string.exponential_smoothing_name)
         .shortName(R.string.smoothing_shortname)
+        .preferencesId(R.xml.pref_smoothing_exponential)
         .description(R.string.description_exponential_smoothing),
     aapsLogger, rh
 ), Smoothing {
@@ -46,10 +51,10 @@ class ExponentialSmoothingPlugin @Inject constructor(
         val ssBG: ArrayList<Double> = ArrayList() //MP array for weighted averaged, doubly smoothed Blood Glucose
         //val ssD: ArrayList<Double> = ArrayList() //MP array for deltas of doubly smoothed Blood Glucose
         var windowSize = data.size //MP number of bg readings to include in smoothing window
-        val o1_weight = 0.4
-        val o1_a = 0.5
-        val o2_a = 0.4
-        val o2_b = 1.0
+        val o1_weight = sp.getDouble(R.string.key_first_order_weight, 0.4)
+        val o2_a = sp.getDouble(R.string.key_parameter_a2, 0.4)
+        val o2_b = sp.getDouble(R.string.key_parameter_b2, 1.0)
+        val o1_a = sp.getDouble(R.string.key_parameter_a1, 0.5)
         var insufficientSmoothingData = false
 
         // ADJUST SMOOTHING WINDOW TO ONLY INCLUDE VALID READINGS
@@ -132,5 +137,29 @@ class ExponentialSmoothingPlugin @Inject constructor(
         }
 
         return data
+    }
+
+    override fun configuration(): JSONObject {
+        val c = JSONObject()
+        try {
+            c.put(rh.gs(R.string.key_first_order_weight), sp.getDouble(R.string.key_first_order_weight, 0.5))
+            c.put(rh.gs(R.string.key_parameter_a1), sp.getDouble(R.string.key_parameter_a1, 0.5))
+            c.put(rh.gs(R.string.key_parameter_a2), sp.getDouble(R.string.key_parameter_a2, 0.4))
+            c.put(rh.gs(R.string.key_parameter_b2), sp.getDouble(R.string.key_parameter_b2, 1.0))
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        return c
+    }
+
+    override fun applyConfiguration(configuration: JSONObject) {
+        try {
+            if (configuration.has(rh.gs(R.string.key_first_order_weight))) sp.putDouble(rh.gs(R.string.key_first_order_weight), configuration.getDouble(rh.gs(R.string.key_first_order_weight)))
+            if (configuration.has(rh.gs(R.string.key_parameter_a1))) sp.putDouble(rh.gs(R.string.key_parameter_a1), configuration.getDouble(rh.gs(R.string.key_parameter_a1)))
+            if (configuration.has(rh.gs(R.string.key_parameter_a2))) sp.putDouble(rh.gs(R.string.key_parameter_a2), configuration.getDouble(rh.gs(R.string.key_parameter_a2)))
+            if (configuration.has(rh.gs(R.string.key_parameter_b2))) sp.putDouble(rh.gs(R.string.key_parameter_b2), configuration.getDouble(rh.gs(R.string.key_parameter_b2)))
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
     }
 }

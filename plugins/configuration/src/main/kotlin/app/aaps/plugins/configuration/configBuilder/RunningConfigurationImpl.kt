@@ -68,6 +68,7 @@ class RunningConfigurationImpl @Inject constructor(
                 json.put("sensitivity", sensitivityInterface.id.value)
                 json.put("sensitivityConfiguration", sensitivityInterface.configuration())
                 json.put("smoothing", smoothingInterface.javaClass.simpleName)
+                json.put("smoothingConfiguration", smoothingInterface.configuration())
                 json.put("overviewConfiguration", overviewInterface.configuration())
                 json.put("safetyConfiguration", safetyInterface.configuration())
                 json.put("pump", pumpInterface.model().description)
@@ -137,6 +138,8 @@ class RunningConfigurationImpl @Inject constructor(
                         aapsLogger.debug(LTag.CORE, "Changing smoothing plugin to ${smoothingPlugin.javaClass.simpleName}")
                         configBuilder.performPluginSwitch(p, true, PluginType.SMOOTHING)
                     }
+
+                    configuration.smoothingConfiguration?.let { sc -> smoothingPlugin.applyConfiguration(sc) }
                 }
             }
         }

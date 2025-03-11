@@ -10,6 +10,7 @@ import app.aaps.core.interfaces.plugin.PluginBase
 import app.aaps.core.interfaces.plugin.PluginDescription
 import app.aaps.core.interfaces.resources.ResourceHelper
 import app.aaps.core.interfaces.smoothing.Smoothing
+import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.math.abs
@@ -54,6 +55,13 @@ class AvgSmoothingPlugin @Inject constructor(
         // data[data.lastIndex].smoothed = data[data.lastIndex].value
         // data[0].smoothed = data[0].value
         return data
+    }
+
+    override fun configuration(): JSONObject {
+        return JSONObject()
+    }
+
+    override fun applyConfiguration(configuration: JSONObject) {
     }
 
     private fun isValid(n: Double): Boolean {

@@ -1,8 +1,9 @@
 package app.aaps.core.interfaces.smoothing
 
+import app.aaps.core.interfaces.configuration.ConfigExportImport
 import app.aaps.core.data.iob.InMemoryGlucoseValue
 
-interface Smoothing {
+interface Smoothing : ConfigExportImport {
 
     /**
      * Smooth values in List

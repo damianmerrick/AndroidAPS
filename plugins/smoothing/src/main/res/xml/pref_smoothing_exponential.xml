@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:validate="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:key="@string/key_smoothing_settings"
+        android:title="@string/smoothing_settings"
+        app:initialExpandedChildrenCount="0">
+
+        <app.aaps.core.validators.ValidatingEditTextPreference
+            android:defaultValue="0.4"
+            android:dialogMessage="@string/first_order_weight_summary"
+            android:inputType="numberDecimal"
+            android:key="@string/key_first_order_weight"
+            android:maxLines="20"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/first_order_weight"
+            validate:floatmaxNumber="1.0"
+            validate:floatminNumber="0.0"
+            validate:testType="floatNumericRange" />
+
+        <app.aaps.core.validators.ValidatingEditTextPreference
+            android:defaultValue="0.5"
+            android:dialogMessage="@string/parameter_a1_summary"
+            android:inputType="numberDecimal"
+            android:key="@string/key_parameter_a1"
+            android:maxLines="20"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/parameter_a1"
+            validate:floatmaxNumber="1.0"
+            validate:floatminNumber="0.1"
+            validate:testType="floatNumericRange" />
+
+        <app.aaps.core.validators.ValidatingEditTextPreference
+            android:defaultValue="0.4"
+            android:dialogMessage="@string/parameter_a2_summary"
+            android:inputType="numberDecimal"
+            android:key="@string/key_parameter_a2"
+            android:maxLines="20"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/parameter_a2"
+            validate:floatmaxNumber="1.0"
+            validate:floatminNumber="0.0"
+            validate:testType="floatNumericRange" />
+
+        <app.aaps.core.validators.ValidatingEditTextPreference
+            android:defaultValue="1.0"
+            android:dialogMessage="@string/parameter_b2_summary"
+            android:inputType="numberDecimal"
+            android:key="@string/key_parameter_b2"
+            android:maxLines="20"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/parameter_b2"
+            validate:floatmaxNumber="1.0"
+            validate:floatminNumber="0.0"
+            validate:testType="floatNumericRange" />
+
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>

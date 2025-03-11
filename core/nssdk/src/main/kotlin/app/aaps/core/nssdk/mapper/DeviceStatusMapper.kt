@@ -91,6 +91,7 @@ internal fun RemoteDeviceStatus.Configuration.toNSDeviceStatusConfiguration(): N
         insulinConfiguration = insulinConfiguration?.let { JSONObject(it.toString()) },
         apsConfiguration = apsConfiguration?.let { JSONObject(it.toString()) },
         sensitivityConfiguration = sensitivityConfiguration?.let { JSONObject(it.toString()) },
+        smoothingConfiguration = smoothingConfiguration?.let { JSONObject(it.toString()) },
         overviewConfiguration = overviewConfiguration?.let { JSONObject(it.toString()) },
         safetyConfiguration = safetyConfiguration?.let { JSONObject(it.toString()) }
     )
@@ -106,6 +107,7 @@ internal fun NSDeviceStatus.Configuration.toRemoteDeviceStatusConfiguration(): R
         insulinConfiguration = insulinConfiguration?.let { JsonParser.parseString(it.toString()).asJsonObject },
         apsConfiguration = apsConfiguration?.let { JsonParser.parseString(it.toString()).asJsonObject },
         sensitivityConfiguration = sensitivityConfiguration?.let { JsonParser.parseString(it.toString()).asJsonObject },
+        smoothingConfiguration = smoothingConfiguration?.let { JsonParser.parseString(it.toString()).asJsonObject },
         overviewConfiguration = overviewConfiguration?.let { JsonParser.parseString(it.toString()).asJsonObject },
         safetyConfiguration = safetyConfiguration?.let { JsonParser.parseString(it.toString()).asJsonObject }
     )

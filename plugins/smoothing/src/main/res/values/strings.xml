@@ -8,4 +8,30 @@
     <string name="description_avg_smoothing">"Average smoothing algorithm, newest value is not affected"</string>
     <string name="no_smoothing_name">No smoothing</string>
     <string name="description_no_smoothing">"No smoothing performed on input glucose data. Use this when you already have filtered data e.g. from BYODA G6."</string>
+    <string name="key_smoothing_settings" translatable="false">smoothing_settings</string>
+    <string name="smoothing_settings">Smoothing settings</string>
+    <string name="first_order_weight_summary">Fractional weight of the first-order value (faster, less smooth) to use in the smoothed result value. The second-order contribution is one minus this fractional weight. A lower fractional weight here results in a more responsive but less smooth BGL curve, while a higher value will be smoother but less responsive (more delay). Default 0.4.</string>
+    <string name="key_first_order_weight" translatable="false">first_order_weight</string>
+    <string name="first_order_weight">First-order weight</string>
+    <string name="parameter_a1_summary">Parameter \'a\' in the first-order smoothing calculation. Determines the fraction of previous BG delta to be added to obtain the next BG value. Higher values are more responsive but less smooth. Default 0.5.</string>
+    <string name="key_parameter_a1" translatable="false">parameter_a1</string>
+    <string name="parameter_a1">a1: First-order \'a\'</string>
+    <string name="key_parameter_a2" translatable="false">parameter_a2</string>
+    <string name="parameter_a2">a2: Second-order \'a\'</string>
+    <string name="key_parameter_b2" translatable="false">parameter_b2</string>
+    <string name="parameter_b2">b2: Second-order \'b\'</string>
+    <string name="parameter_a2_summary">Parameter \'a\' in the second-order smoothing calculation. Determines the weighting of the direct glucose reading, versus (previous reading + delta). Higher values are more responsive, but less smooth. Default 0.4.</string>
+    <string name="parameter_b2_summary">Parameter \'b\' in the second-order smoothing calculation. Determines the weighting of the current smoothed glucose difference in computing the BG delta, versus the previous BG delta. A value of 1.0 uses only the current smoothed glucose difference as the delta (most responsive). Lower values give more contribution from previous delta values. Default 1.0.</string>
+
+    <string name="ms_smoothing_name">Modified sinc smoothing</string>
+    <string name="description_ms_smoothing">"Modified sinc smoothing algorithm"</string>
+    <string name="noise_gain_summary">The filter\'s white noise suppression parameter. Higher values more closely match the original BGs; lower values provide more smoothing. Default 0.4. Recommended range 0.2 (very noisy data) to 0.6 (for very good BG data with very little noise).</string>
+    <string name="key_noise_gain">noise_gain</string>
+    <string name="noise_gain">Noise gain</string>
+    <string name="filter_degree_summary">Degree of the filter kernel. Should be 2, 4, 8 or 10; any values outside this will be rounded up to the nearest supported degree. Default 10. It is not recommended to change this.</string>
+    <string name="key_filter_degree">filter_degree</string>
+    <string name="filter_degree">Degree of filter kernel</string>
+    <string name="key_ms_smoothing_settings">ms_smoothing_settings</string>
+    <string name="ms_smoothing_settings">MS smoothing settings</string>
+
 </resources>

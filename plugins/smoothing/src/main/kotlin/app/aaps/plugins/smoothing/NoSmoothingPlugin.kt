@@ -7,6 +7,7 @@ import app.aaps.core.interfaces.plugin.PluginBase
 import app.aaps.core.interfaces.plugin.PluginDescription
 import app.aaps.core.interfaces.resources.ResourceHelper
 import app.aaps.core.interfaces.smoothing.Smoothing
+import org.json.JSONObject
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,4 +27,10 @@ class NoSmoothingPlugin @Inject constructor(
 ), Smoothing {
 
     override fun smooth(data: MutableList<InMemoryGlucoseValue>): MutableList<InMemoryGlucoseValue> = data
+    override fun configuration(): JSONObject {
+        return JSONObject()
+    }
+
+    override fun applyConfiguration(configuration: JSONObject) {
+    }
 }

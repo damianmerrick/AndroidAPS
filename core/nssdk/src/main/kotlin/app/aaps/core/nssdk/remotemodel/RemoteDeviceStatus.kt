@@ -71,6 +71,7 @@ internal data class RemoteDeviceStatus(
         @Contextual @SerializedName("insulinConfiguration") val insulinConfiguration: JsonObject?,
         @Contextual @SerializedName("apsConfiguration") val apsConfiguration: JsonObject?,
         @Contextual @SerializedName("sensitivityConfiguration") val sensitivityConfiguration: JsonObject?,
+        @Contextual @SerializedName("smoothingConfiguration") val smoothingConfiguration: JsonObject?,
         @Contextual @SerializedName("overviewConfiguration") val overviewConfiguration: JsonObject?,
         @Contextual @SerializedName("safetyConfiguration") val safetyConfiguration: JsonObject?
     )
